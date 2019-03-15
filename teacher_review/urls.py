@@ -24,7 +24,7 @@ urlpatterns = [
     path('teacher/<int:teacher_id>/',teaching_post),
     path('admin/', admin.site.urls),
     path('reviews/<int:teacher_id>/',review),
-     path('login/',signin),
+    path('login/',signin),
     path('logout/',signout),
     path('signup/',signup),
 

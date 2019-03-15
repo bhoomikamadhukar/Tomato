@@ -32,12 +32,13 @@ def review(request,teacher_id):
 	reviews = Reviews.objects.filter(teacher=teacher)
 
 	if request.method=="POST":
-		form_rating=request.POST['rating']
-		form_comment=request.POST['comment']
+		print(request.POST)
+		form_rating=request.POST['ratings']
+		form_comment=request.POST['comments']
 		Reviews.objects.create(ratings=form_rating, teacher=teacher, comments=form_comment).save()
 		
 		return redirect(f'/teacher/{teacher_id}')
-	return render(request,"ratings.html")
+	return render(request,"ratings.html",{'teacher_id':teacher_id})
 		
 
 def signin(request):
