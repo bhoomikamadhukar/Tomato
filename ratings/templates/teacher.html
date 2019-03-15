@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Teacher Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/home/">Tomato</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/home/">Home</a>
+          
+          <a class="nav-item nav-link" href="/logout/">Logout</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    <!-- <div class="card" style="min-width: 45%; max-width: 45%; margin-right: 5%; margin-top:5%"> -->
+    <div class="row no-gutters" style="margin-top: 5%;margin-left: 15%;">
+      <div class="col-md-4">
+        <img src="{{teacher.cover.url}}" class="card-img" >
+      </div>
+      
+      <div class="col-md-8">
+        <div class="card-body">
+          
+          
+          <h4 class="card-title" style="font-size: 30px; margin-top: -2%; margin-left: 3%; font-family: 'Crimson Text', serif;"><b>{{teacher.name}}</h4>
+          
+          <p class="card-text" style="font-size: 20px; margin-left: 3%; font-weight: normal; font-family: 'Crimson Text', serif;">Qualification: {{teacher.qualification}}</p>
+          <p class="card-text" style="font-size: 18px; margin-left: 3%; font-weight: normal;">Organization:  {{teacher.organization}}</p>
+          <p class="card-text" style="font-size: 18px; margin-left: 3%; font-weight: normal;">Email:   {{teacher.email}}</p>
+          <p class="card-text" style="font-size: 18px; margin-left: 3%; font-weight: normal;">Contact: {{teacher.phone}}</p>
+          {% for star in ratings %}
+            <span style="margin-left: 3%;">⭐</span>
+          {% endfor %}
+          <br>
+          {% for skill, rating in teacher.get_skill_ratings.items %}
+            <p class="card-text" style="font-size: 18px; font-weight: normal; margin-left: 3%;">{{skill}}: {{rating}}</p>
+          {% endfor %}
+          <a href="/reviews/{{teacher.id}}">
+          <button type="button" class="btn btn-primary">Primary</button>
+  </a>
+          
+          
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+  
+</div>
+
+</body>
+</html>
