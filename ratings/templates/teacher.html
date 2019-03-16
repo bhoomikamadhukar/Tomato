@@ -44,12 +44,18 @@
             <span style="margin-left: 3%;">⭐</span>
           {% endfor %}
           <br>
-          {% for skill, rating in teacher.get_skill_ratings.items %}
-            <p class="card-text" style="font-size: 18px; font-weight: normal; margin-left: 3%;">{{skill}}: {{rating}}</p>
+          {{teacher.get_skill_ratings|floatformat:"1"}}
+          <br>
+          
+          {% for i in "x"|ljust:teacher.get_skill_ratings %}
+            
+            <ion-icon name="star" style="color:#FFD700"></ion-icon>
+            
           {% endfor %}
+          <br>
           <a href="/reviews/{{teacher.id}}">
-          <button type="button" class="btn btn-primary">Primary</button>
-  </a>
+            <button type="button" class="btn btn-primary">Review</button>
+          </a>
           
           
         </div>
@@ -58,9 +64,21 @@
     </div>
     
   </div>
-  
-  
-</div>
+  <br>
 
+  <div class="container">
+    {% for review in reviews %}
+      <div class="card">
+        <div class="card-body">
+          {{review.user.username}}
+          {{review.comments}}
+          
+        </div>
+      </div>
+      <br><br>
+    {% endfor %}
+  </div>
+</div>
+<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
 </body>
 </html>

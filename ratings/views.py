@@ -5,9 +5,7 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-	all_teachers=Teacher.objects.all()
-
-	
+	all_teachers=Teacher.objects.all()		
 
 	return render(request,"home.html",{'all_teachers':all_teachers})
 
@@ -16,28 +14,22 @@ def teaching_post(request,teacher_id):
 	all_skills=skills.objects.filter(teacher=teacher)
 	reviews = Reviews.objects.filter(teacher=teacher)
 
-	total = 0
-	count = len(reviews)
+	return render(request,"teacher.html",{"teacher":teacher,"all_skills":all_skills, "reviews":reviews})
 
-	for review in reviews:
-		total += review.ratings
-
-	total = total / count
-
-
-	return render(request,"teacher.html",{"teacher":teacher,"all_skills":all_skills, "ratings":range(round(total))})
 def review(request,teacher_id):
 	teacher=Teacher.objects.get(id=teacher_id)
-	all_skills=skills.objects.filter(teacher=teacher)
 	reviews = Reviews.objects.filter(teacher=teacher)
 
 	if request.method=="POST":
-		print(request.POST)
-		form_rating=request.POST['ratings']
+		form_rating=request.POST['rating']
 		form_comment=request.POST['comments']
-		Reviews.objects.create(ratings=form_rating, teacher=teacher, comments=form_comment).save()
+		review = Reviews(comments = form_comment, teacher=teacher, rating = form_rating, user = request.user)
+		review.save()
+		teacher.ratings[form_rating] += 1
+		teacher.save()
+
 		
-		return redirect(f'/teacher/{teacher_id}')
+		return redirect(f'/teacher/{teacher_id}/')
 	return render(request,"ratings.html",{'teacher_id':teacher_id})
 		
 
